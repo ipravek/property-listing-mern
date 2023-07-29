@@ -6,19 +6,27 @@ const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
 const rfs = require("rotating-file-stream");
+const cors = require("cors");
 
 // Db connection
 db.connect();
 
 // Logger
 const accessLogStream = rfs.createStream("access.log", {
-  interval: "1d",
+  interval: "12M",
   path: path.join(__dirname, "log"),
 });
 
 app.use(
   morgan("combined", {
     stream: accessLogStream,
+  })
+);
+
+// CORS
+app.use(
+  cors({
+    origin: ["*"],
   })
 );
 
