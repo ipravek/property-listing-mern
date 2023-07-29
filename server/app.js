@@ -24,11 +24,7 @@ app.use(
 );
 
 // CORS
-app.use(
-  cors({
-    origin: ["*"],
-  })
-);
+app.use(cors());
 
 // Body Parser
 app.use(express.json());
