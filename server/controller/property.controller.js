@@ -1,19 +1,40 @@
 const Property = require("../model/property.model");
 
 const list = async (req, res) => {
+  const { search, page = 1, limit = 10, sort = "desc" } = req.query;
+
   try {
-    const property = await Property.find({
+    const skipItems = (page - 1) * limit;
+    const findData = {
       isActive: true,
-    }).select({
-      id: 1,
-      name: 1,
-      location: 1,
-      image: 1,
-    });
+    };
+
+    if (search && search.length > 0) {
+      findData.name = { $regex: search, $options: "i" };
+    }
+
+    const property = await Property.find(findData)
+      .skip(parseInt(skipItems))
+      .limit(parseInt(limit))
+      .select({
+        id: 1,
+        name: 1,
+        location: 1,
+        image: 1,
+      })
+      .sort({
+        createdAt: sort == "desc" ? "desc" : "asc",
+      });
+
+    const totalDocs = await Property.countDocuments();
 
     return res.status(200).json({
       message: "Data Fetched successfully!",
       data: property,
+      pagination: {
+        total: totalDocs,
+        page: parseInt(page),
+      },
     });
   } catch (err) {
     console.log(err);

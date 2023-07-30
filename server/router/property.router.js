@@ -6,11 +6,18 @@ const {
   propertyBodyParams,
   propertyQueryParam,
   propertyBodyParamsForUpdate,
+  propertyQueryParamForList,
 } = require("../utils/validateParams");
 
 // REST End-points
 // List
-router.route("/").get(propertyController.list);
+router
+  .route("/")
+  .get(
+    propertyQueryParamForList,
+    validateErrorMessage,
+    propertyController.list
+  );
 
 // View
 router
