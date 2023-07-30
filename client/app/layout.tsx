@@ -1,13 +1,24 @@
+"use client";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
+import Navbar from "./components/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "React App",
-  description: "It just a React app",
-};
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4267B2",
+    },
+    secondary: {
+      main: "#0e0e0e",
+    },
+  },
+});
 
 export default function RootLayout({
   children,
@@ -15,8 +26,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ThemeProvider theme={theme}>
+      <html lang="en">
+        <body className={roboto.className}>
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            limit={1}
+            theme="light"
+          />
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Property Listing App",
+  description: "Powered By React.js",
+};
