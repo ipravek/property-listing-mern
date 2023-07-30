@@ -36,6 +36,7 @@ const ImageCard = ({
         <CardMedia
           component="img"
           height="250"
+          width="250"
           image={image}
           alt="Image"
           sx={{

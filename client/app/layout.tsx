@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Footer from "./components/Footer";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -44,6 +45,7 @@ export default function RootLayout({
           />
           <Navbar />
           {children}
+          <Footer />
         </body>
       </html>
     </ThemeProvider>
