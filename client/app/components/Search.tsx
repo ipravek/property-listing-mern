@@ -18,7 +18,11 @@ export default function Search({ handleSearch }: { handleSearch: any }) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <Button size="large" variant="outlined" onClick={handleSearch(search)}>
+      <Button
+        size="large"
+        variant="outlined"
+        onClick={() => handleSearch(search)}
+      >
         Search
       </Button>
     </Box>
