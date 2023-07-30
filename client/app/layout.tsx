@@ -49,8 +49,3 @@ export default function RootLayout({
     </ThemeProvider>
   );
 }
-
-export const metadata: Metadata = {
-  title: "Property Listing App",
-  description: "Powered By React.js",
-};
